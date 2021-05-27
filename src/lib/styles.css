@@ -1,6 +1,11 @@
+#app {
+  background-color: #f1f1f1a1;
+  padding: 20px;
+}
+
 .react-quiz-container {
   margin: 20px;
-  width: 500px;
+  max-width: 700px;
 }
 
 .react-quiz-container .startQuizWrapper {
@@ -9,7 +14,6 @@
 
 .react-quiz-container .btn {
   margin-bottom: 0;
-  font-weight: 600;
   text-align: center;
   padding: 11px 12px;
   vertical-align: middle;
@@ -30,7 +34,7 @@
   margin-bottom: 10px;
   border-radius: 4px;
   border: 1px solid #e8e8e8;;
-  font-size: 15px;
+  font-size: 14px;
   display: block;
   white-space: normal;
   text-align: unset;
@@ -49,6 +53,12 @@
   color: #fff;
 }
 
+.questionWrapperBody .answerBtn {
+  width: 100%;
+  border: none !important;
+  background: #f5f5f5;
+}
+
 .react-quiz-container .correct {
   background: green;
 }
@@ -62,8 +72,24 @@
   width: 100%;
 }
 
-.react-quiz-container .answerBtn {
-  width: 100%;
+.questionWrapperBody .answerBtn::before {
+  content: '\26aa';
+  margin-right: 15px;
+}
+
+.questionWrapperBody .answerBtn.incorrect::before,
+.questionWrapperBody .answerBtn.correct::before {
+  content: '\25C9';
+}
+
+
+.questionWrapperBody.multi .answerBtn::before {
+  content: '\2610';
+}
+
+.questionWrapperBody.multi .answerBtn.incorrect::before,
+.questionWrapperBody.multi .answerBtn.correct::before {
+  content: '\2612';
 }
 
 .react-quiz-container .startQuizWrapper .startQuizBtn {
@@ -158,4 +184,24 @@
 .react-quiz-container .selection-tag.segment {
   background: #3db4b9;
   margin-left: 5px;
+}
+
+.timer {
+    position: fixed;
+    font-size: xxx-large;
+    top: 10%;
+    right: 10%;
+    padding: 10px;
+    box-shadow: 2px 0px 3px 0px #6b6060;
+}
+
+.timer.rush,
+.timer.timeout {
+  color: red;
+}
+
+@media only screen and (max-width: 600px) {
+  .timer {
+    top: 10px;
+  }
 }

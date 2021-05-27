@@ -7,9 +7,6 @@ function App() {
   const [quizResult, setQuizResult] = useState();
 
   useEffect(() => {
-      if(quizResult) {
-          console.log('quizResult', quizResult);
-      }
   }, [quizResult]);
 
   return (
@@ -17,6 +14,7 @@ function App() {
       <Quiz
         quiz={quiz}
         shuffle={true}
+        shuffleAnswer={true}
         showInstantFeedback={true}
         continueTillCorrect={true}
         onComplete={setQuizResult}
