@@ -249,6 +249,10 @@ Object
 - run `npm install`
 - run `npm run dev`
 
+## Docker desktop 
+- run `docker build -t son-loc/react-quiz .`
+- run `docker run --name reactquiz -p 8000:80 -d son-loc/react-quiz:latest`
+
 ## Demo
 The demo is available at https://wingkwong.github.io/react-quiz-component/
 

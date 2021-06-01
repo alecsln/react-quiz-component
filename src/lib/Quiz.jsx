@@ -127,6 +127,7 @@ const Quiz = ({ quiz, shuffle, shuffleAnswer, showDefaultResult, onComplete, cus
         showInstantFeedback={showInstantFeedback}
         continueTillCorrect={continueTillCorrect}
         appLocale={appLocale}
+        homePage={() => setStart(false)}
       />
       }
     </div>

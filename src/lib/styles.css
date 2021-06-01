@@ -38,6 +38,7 @@
   display: block;
   white-space: normal;
   text-align: unset;
+    overflow-wrap: break-word;
 }
 
 .react-quiz-container .questionWrapper .btn.correct {
@@ -203,5 +204,6 @@
 @media only screen and (max-width: 600px) {
   .timer {
     top: 10px;
+      font-size: x-large;
   }
 }

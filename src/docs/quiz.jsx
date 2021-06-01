@@ -6,7 +6,7 @@ const segment = {
 
 export const quiz = {
   "quizTitle": "EpiServer Commerce",
-  "quizSynopsis": "for training",
+  "quizSynopsis": "Niteco VietNam ltd",
   "questions": [
     {
       "question": "Where can you find versions for Episerver Commerce (or addons) in order to apply them to an existing site?",
@@ -299,7 +299,7 @@ export const quiz = {
         "You create your custom implementation and register it within an IConfigurableModule, which has a ModuleDependency on Commercelnitialization",
         "Both answer A and answer B are correct, either of them can be used depending on your preferences."
       ],
-      "correctAnswer": [3],
+      "correctAnswer": [2],
       "explanation": "",
     },
     {
@@ -600,7 +600,11 @@ export const quiz = {
       "explanation": "IWarehouseRepository",
     },
     {
-      "question": "Catalog data is imported but no warehouse or inventory date configured. Which code snippet completes the following sample code by persisting a warehouse to the database?",
+      "question": `Catalog data is imported but no warehouse or inventory date configured. Which code snippet completes the following sample code by persisting a warehouse to the database?\n
+      var warehouse = new Warehouse();\n
+      warehouse.Code = "WH_001";\n
+      warehouse.ContactInformation = ... ;\n
+      `,
       "answers": [
         "ServiceLocator.Current.GetInstance<IWarehouseInventoryService>().Save(new WarehouseInventory(WarehouseCode = warehouse.Code));",
         "ServiceLocator.Current.GetInstance<IWarehouseRepository>().Save(warehouse);",
@@ -708,7 +712,7 @@ export const quiz = {
         "CatalogEntryDto",
         "ProductContent"
       ],
-      "correctAnswer": [4],
+      "correctAnswer": [3,4],
       "explanation": ``,
     },
     {
@@ -960,6 +964,17 @@ export const quiz = {
         "The custom payment provider needs to be configured to the PaymentPlanType attribute in the efc.order.config."
       ],
       "correctAnswer": [5],
+      "explanation": "PaymentPlanType",
+    },
+    {
+      "question": "Which statement is not true when creating a custom payment provider?",
+      "answers": [
+        "Every payment provider must at least implement one of the IPaymentGateway and IPaymentPlugin interfaces",
+        "IPaymentGateway does not work with the abstraction IPayment",
+        "The ProcessPayment method should return a PaymentProcessingResult object if the payment provider implements IPaymentPlugin.",
+        "The custom payment provider needs to be configured to the PaymentPlanType attribute in the ect.order.config."
+      ],
+      "correctAnswer": [4],
       "explanation": "PaymentPlanType",
     },
     {
@@ -1242,8 +1257,8 @@ export const quiz = {
         `By extending the PurchaseOrder class.`,
         `By overriding methods in IOrderRepository.`
       ],
-      "correctAnswer": [4],
-      "explanation": "Dump: IOrderRepository. Từ sau bản 12 là sử dụng IOrderEvents https://world.episerver.com/documentation/developer-guides/commerce/orders/order-events/"
+      "correctAnswer": [1],
+      "explanation": "Dump: IOrderEvents. Từ sau bản 12 là sử dụng IOrderEvents https://world.episerver.com/documentation/developer-guides/commerce/orders/order-events/"
     },
     {
       "question": `Which method will convert a Cart to a PurchaseOrder?`,
@@ -1395,7 +1410,7 @@ Best discount, B is better than A -> B should have higher priority.`,
         `Alter the file ecf.catalog.config.`,
         `Create a class inherits from IConfigurable Module to configure new class as implementation of Purchase Order.`
       ],
-      "correctAnswer": [2],
+      "correctAnswer": [5],
       "explanation": `// NOTE: Create a class that implements the IOrderRepository interface (or inherits the DefaultOrderRepository) and use the intercept pattern in an IConfigurableModule.\n
       SaveAsPurchaseOrder()`,
     },
@@ -1713,5 +1728,101 @@ Best discount, B is better than A -> B should have higher priority.`,
       "correctAnswer": [1],
       "explanation": ""
     },
+    {
+      "question": "Which of the following is correct regarding globalized catalog content?",
+      "answers": [
+        "There is always an English language version.",
+        "All catalogs must have the save languages enabled.",
+        "Fallback rules can be configured in the user interface.",
+        "Catalog content is available for enabled languages.",
+        "All catalogs must have the same languages enabled.",
+        "Content creation is available for enabled and configured languages.",
+        "Catalogs will by default have the same set of languages enabled as the CMS has."
+      ],
+      "correctAnswer": [4, 6, 7],
+      "explanation": "Catalog; enabled language; same languages enabled; CMS"
+    },
+    {
+      "question": "You want to migrate an old site to the improved cart system, what options do you have for the transition?",
+      "answers": [
+        "Do nothing, the new cart mode is enabled for an upgraded site.",
+        "Add the feature SerializedCarts in ecl.app.config",
+        "Add the feature SerializedCarts in web.config",
+        "Add the feature WorkflowsVNext in ecf.app.config",
+        "Add the following to your InitializeModile class : ServiceLocator.Current.Getinstance<IFeatureSwitch> ().EnableFeature(SerializedCarts.PeatureSerializedCarts);"
+      ],
+      "correctAnswer": [2, 5],
+      "explanation": "SerializedCarts; ecl.app.config; IFeatureSwitch"
+    },
+    {
+      "question": "What is the purpose of PCI standards?",
+      "answers": [
+        "To minimize the risk of password compromise.",
+        "To ensure that your site complies with site usability standards.",
+        "To reduce the risk of customer credit information being stolen.",
+        "To prevent cross-site scripting vulnerabilities on a site."
+      ],
+      "correctAnswer": [3],
+      "explanation": "being stolen"
+    },
+    {
+      "question": "Which code line in the product page would be the most likely to cause bad performance on the site when your product page is slow to load?",
+      "answers": [
+        "var categoriesContent = ServiceLocator.CurrentInstance<IContentLoader><IGetNodeContent>(productCategories.ContentLink);",
+        "var defaultPrice = ServiceLocator.Current.GetInstance<IPriceService>().GetDefaultPrice(marketld, DateTime.UtcNow, new CatalogKey(productCode), Currency.USD);",
+        "var relatedEntries = ServiceLocator.Current.GetInstance<IRelationRepository>.GetChildEntries(productLink);",
+        `var siblingProductLinks = ServiceLocator.Current.GetInstance<IContentLoader>().GetDescendants(parentNodeLink).Where(c =>
+        ServiceLocator.Current.GetInstance<ReferenceConverter>().GetContentType(c)==
+        CatalogContentType.CatalogEntry)`
+      ],
+      "correctAnswer": [4],
+      "explanation": "GetDescendants"
+    },
+    {
+      "question": "You want to reserve inventory for a cart and decrement stock. What code snippet will do that?",
+      "answers": [
+        "cart.UpdateInventoryOrRemoveLineItems((item, issue) => {}))",
+        "_inventoryProcessor.UpdateInventoryOrRemoveLineItem(cart.GetFirstShipment(), (item, issue) => {})",
+        "cart.AdjustInventoryOrRemoveLineItems((item, issue) => {}))",
+        "_inventoryProcessor.AdjustInventoryOrRemoveLineItem(cart.GetFirstShipment(), OrderStatus.InProgress, (item, issue) => {})",
+        "_inventoryProcessor.AdjustInventoryOrRemoveLineItem(cart.GetFirstShipment(), OrderStatus.OnHold, (item, issue) => {})"
+      ],
+      "correctAnswer": [3],
+      "explanation": "AdjustInventoryOrRemoveLineItems; OrderStatus.InProgress"
+    },
+    {
+      "question": "You are creating a standard B2C checkout for your site, which sells shirts to customers. Your checkout includes the following steps.",
+      "answers": [
+        "Create and add payment(s) to the cart",
+        "Save the cart, as a purchase order",
+        "Process payments added to the cart",
+        "Validate line items so they are valid for purch and there is enough inventory along with a check that prices are valid",
+        "Apply discounts. If any."
+      ],
+      "correctAnswer": [4, 5, 1, 3, 2],
+      "explanation": "flow luôn luôn là: cho đồ vào giỏ, kiểm tra tồn dư, lấy discount rồi mới thanh toán tiền;\n\nValidate -> discount -> create & add payment -> process payment -> save cart"
+    },
+    {
+      "question": `You have the following variation model class:\n
+      [CatalogContentType]\n
+      Public class MyVariant : VariantionContent\n
+      {\n
+        public string Color { get; set; }\n
+      }\n
+      How should you modify the class to set a default value to Color when a merchandiser creates a new item of that type? `,
+      "answers": [
+        `[DefaultValue("Color", "Red")] public class MyVariation : VariationContent`,
+        `[DefaultValue("Red”)] public string Color { get; set; }`,
+        `public override void SetDefaultValues(ContentType contentType)\n{ base.SetDefaultValues(ContentType contentType); }`,
+        `public override string GetPropertyValue(string name) \n
+        {
+          If (name == "Color");
+          Return "Red";
+        }
+        `,
+      ],
+      "correctAnswer": [3],
+      "explanation": "override SetDefaultValues"
+    }
   ]
 };

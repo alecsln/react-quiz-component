@@ -6,7 +6,7 @@ import InstantFeedback from "./core-components/InstantFeedback";
 import Explanation from "./core-components/Explanation";
 import Timer from './core-components/Timer';
 
-const Core = ({ questions, duration, maxQuestion, appLocale, showDefaultResult, onComplete, customResultPage, showInstantFeedback, continueTillCorrect }) => {
+const Core = ({ homePage, questions, duration, maxQuestion, appLocale, showDefaultResult, onComplete, customResultPage, showInstantFeedback, continueTillCorrect }) => {
   const [incorrectAnswer, setIncorrectAnswer] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [showNextQuestionButton, setShowNextQuestionButton] = useState(false);
@@ -244,17 +244,14 @@ const Core = ({ questions, duration, maxQuestion, appLocale, showDefaultResult, 
 
   return (
     <div className="questionWrapper">
+      <div>
+        <button onClick={() => homePage()} className="nextQuestionBtn btn">
+          Home
+        </button>
+      </div>
       <Timer duration={duration} />
       {!endQuiz &&
         <div className={`questionWrapperBody ${question.correctAnswer.length > 1 ? 'multi' : ''}`}>
-          <div className="questionModal">
-            <InstantFeedback
-              question={question}
-              showInstantFeedback={showInstantFeedback}
-              correctAnswer={correctAnswer}
-              incorrectAnswer={incorrectAnswer}
-            />
-          </div>
           <div>{appLocale.question} {currentQuestionIndex + 1}:</div>
           <div dangerouslySetInnerHTML={rawMarkup(question && question.question)} />
           {/* {question && question.questionPic && <img src={question.questionPic} alt="image" />} */}
@@ -267,6 +264,14 @@ const Core = ({ questions, duration, maxQuestion, appLocale, showDefaultResult, 
               </button>
             </div>
           }
+          <div className="questionModal">
+            <InstantFeedback
+              question={question}
+              showInstantFeedback={showInstantFeedback}
+              correctAnswer={correctAnswer}
+              incorrectAnswer={incorrectAnswer}
+            />
+          </div>
         </div>
       }
       {endQuiz && showDefaultResultState && customResultPage === undefined &&
@@ -286,7 +291,8 @@ Core.propTypes = {
   customResultPage: PropTypes.func,
   showInstantFeedback: PropTypes.bool,
   continueTillCorrect: PropTypes.bool,
-  appLocale: PropTypes.object
+  appLocale: PropTypes.object,
+  homePage: PropTypes.func
 };
 
 export default Core;
